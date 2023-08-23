@@ -1,5 +1,6 @@
 #!/bin/sh
 set -o errexit  # Exit the script with error if any of the commands fail
+set -x
 
 # Supported environment variables:
 #   AUTH                   Set to "auth" to enable authentication. Defaults to "noauth"
