@@ -46,5 +46,5 @@ fi
 # Ensure the target URI is set
 : "${MONGODB_URI?Please set the MONGODB_URI environment variable}"
 
-echo "Starting mongoproxy with URI: $MONGODB_URI"
-exec "${GOPATH}/bin/mongoproxy" --target-uri "$MONGODB_URI"
+echo "Starting mongoproxy"
+exec "${GOPATH}/bin/mongoproxy"
