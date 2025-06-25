@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -ex pipefail
 
 GOVERSION="${GOVERESION:-1.24}"
 GOPATH="${GOPATH:-$HOME/go}"
