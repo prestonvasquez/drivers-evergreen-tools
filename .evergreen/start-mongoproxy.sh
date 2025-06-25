@@ -44,9 +44,4 @@ else
 fi
 
 echo "Starting mongoproxy"
-if [ -n "$MONGODB_URI" ]; then
-  exec "${GOPATH}/bin/mongoproxy" --target-uri "$MONGODB_URI"
-else
-  echo "Error: MONGODB_URI environment variable is not set." >&2
-  exit 1
-fi
+exec "${GOPATH}/bin/mongoproxy"
