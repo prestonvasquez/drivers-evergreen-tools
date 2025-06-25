@@ -43,7 +43,7 @@ else
   exit 1
 fi
 
-echo "Starting mongoproxy"
+echo "Starting mongoproxy at ${MONGODB_URI}..."
 if [ -n "$MONGODB_URI" ]; then
   exec "${GOPATH}/bin/mongoproxy" --target-uri "$MONGODB_URI"
 else
