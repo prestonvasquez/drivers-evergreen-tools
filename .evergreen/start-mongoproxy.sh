@@ -34,7 +34,7 @@ test -x "${GOROOT}/bin/go" || {
   exit 1
 }
 
-"${GOROOT}/bin/go" install github.com/prestonvasquez/mongoproxy/cmd/mongoproxy@aed2d6d38a5365a703cc533bcc1da588d7b7f730
+"${GOROOT}/bin/go" install github.com/prestonvasquez/mongoproxy/cmd/mongoproxy@c8d8ebd565a9facd0f5c4e79c6d15190a646227c
 
 if [[ -x "${GOPATH}/bin/mongoproxy" ]]; then
   echo "mongoproxy installed successfully to ${GOPATH}"
@@ -54,7 +54,7 @@ echo "Starting mongoproxy at ${MONGODB_URI}..."
 CMD=("${GOPATH}/bin/mongoproxy" "--target-uri" "$MONGODB_URI")
 
 # If both cert and key are present, turn on TLS
-if [ -n "${SSL:-}" ]; then
+if [ "${SSL:-}" = "ssl" ]; then
   CMD+=(
     "--ca-file" "$DRIVERS_TOOLS/.evergreen/x509gen/ca.pem"
     "--key-file" "$DRIVERS_TOOLS/.evergreen/x509gen/client.pem"
