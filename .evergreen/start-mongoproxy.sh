@@ -60,3 +60,6 @@ if [ -n "${SSL:-}" ]; then
     "--key-file" "$DRIVERS_TOOLS/.evergreen/x509gen/client.pem"
   )
 fi
+
+# replace this shell with mongoproxy
+exec "${CMD[@]}"
