@@ -34,7 +34,7 @@ test -x "${GOROOT}/bin/go" || {
   exit 1
 }
 
-"${GOROOT}/bin/go" install github.com/prestonvasquez/mongoproxy/cmd/mongoproxy@9b420780fca76a317ef66e4f6c138f855d56e817
+"${GOROOT}/bin/go" install github.com/prestonvasquez/mongoproxy/cmd/mongoproxy@aed2d6d38a5365a703cc533bcc1da588d7b7f730
 
 if [[ -x "${GOPATH}/bin/mongoproxy" ]]; then
   echo "mongoproxy installed successfully to ${GOPATH}"
