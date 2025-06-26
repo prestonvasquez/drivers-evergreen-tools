@@ -61,5 +61,4 @@ if [ -n "${SSL:-}" ]; then
   )
 fi
 
-# replace this shell with mongoproxy
 exec "${CMD[@]}"
