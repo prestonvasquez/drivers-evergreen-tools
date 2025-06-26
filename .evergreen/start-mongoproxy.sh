@@ -47,6 +47,7 @@ echo "Starting mongoproxy at ${MONGODB_URI}..."
 #exec "${GOPATH}/bin/mongoproxy"
 
 if [ -n "$MONGODB_URI" ]; then
+  echo "MONGO_GO_DRIVER_CA_FILE: ${MONGO_GO_DRIVER_CA_FILE}"
   exec "${GOPATH}/bin/mongoproxy" --target-uri "$MONGODB_URI"
 else
   echo "Error: MONGODB_URI environment variable is not set." >&2
