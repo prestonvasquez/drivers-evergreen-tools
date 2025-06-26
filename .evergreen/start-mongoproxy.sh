@@ -43,16 +43,20 @@ else
   exit 1
 fi
 
-echo "Starting mongoproxy at ${MONGODB_URI}..."
-#exec "${GOPATH}/bin/mongoproxy"
-
-echo "Environment variables:"
-cat .test.env
-
-if [ -n "$MONGODB_URI" ]; then
-  echo "MONGO_GO_DRIVER_CA_FILE: ${MONGO_GO_DRIVER_CA_FILE}"
-  exec "${GOPATH}/bin/mongoproxy" --target-uri "$MONGODB_URI"
-else
+if [ -z "$MONGODB_URI" ]; then
   echo "Error: MONGODB_URI environment variable is not set." >&2
   exit 1
+fi
+
+echo "Starting mongoproxy at ${MONGODB_URI}..."
+
+# Build the proxy command
+CMD=("${GOPATH}/bin/mongoproxy" "--target-uri" "$MONGODB_URI")
+
+# If both cert and key are present, turn on TLS
+if [ -n "${SSL:-}" ]; then
+  CMD+=(
+    "--ca-file" "$DRIVERS_TOOLS/.evergreen/x509gen/ca.pem"
+    "--key-file" "$DRIVERS_TOOLS/.evergreen/x509gen/client.pem"
+  )
 fi
