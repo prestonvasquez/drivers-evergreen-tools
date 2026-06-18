@@ -73,7 +73,12 @@ echo "Starting HTTP Server 3...done."
 
 
 echo "Starting Failpoint Server..."
-$COMMAND kms_failpoint_server.py --port 9003 > failpoint.log 2>&1 &
+# The failpoint server takes no --cert_file argument, so it derives its TLS cert
+# solely from CSFLE_TLS_CERT_FILE/CSFLE_TLS_CA_FILE (falling back to x509gen). Those
+# vars are exported by callers for the KMIP server, which would make the failpoint
+# server present a cert that does not chain to x509gen/ca.pem (what clients verify
+# against via KMS_FAILPOINT_CA_FILE). Unset them so it uses the x509gen default.
+env -u CSFLE_TLS_CERT_FILE -u CSFLE_TLS_CA_FILE $COMMAND kms_failpoint_server.py --port 9003 > failpoint.log 2>&1 &
 echo "$!" >> kmip_pids.pid
 echo "Starting Failpoint Server...done."
 sleep 1
